@@ -1,3 +1,3 @@
-FROM nginx:alpine
-COPY ./html /usr/share/nginx/html
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+# FROM nginx:alpine
+FROM nginx:mainline
+RUN apt-get update && apt-get install -y nginx-module-njs
