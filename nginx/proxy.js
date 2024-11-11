@@ -1,5 +1,7 @@
 /// <reference path="../node_modules/njs-types/index.d.ts" />
 
+import querystring from "querystring";
+
 function foo(r) {
   r.log("hello from foo() handler");
   return "foo";
@@ -27,21 +29,29 @@ async function hello(r) {
   r.return(200, "Hello world!");
 }
 
+function getAgentQueryParams(r) {
+  const rest = JSON.parse(JSON.stringify(r.args));
+  delete rest["apiKey"];
+  delete rest["loaderVersion"];
+  delete rest["version"];
+
+  const queryParams = { ii: "nginx-proxy-integration/0.1/procdn" };
+  for (const key in rest) {
+    queryParams[key] = rest[key];
+  }
+  return querystring.stringify(queryParams);
+}
+
 function getAgentURL(r) {
   //   r.headersOut["X-Summary"] = reply.headersOut["Content-Type"];
   const apiKey = r.args["apiKey"];
   const loaderVersion = r.args["loaderVersion"];
   const version = r.args["version"];
 
-  r.log(apiKey);
-  r.log(loaderVersion);
-  r.log(version);
-
   const loaderParam = loaderVersion ? `/loader_v${loaderVersion}.js` : "";
   const agentDownloadUrl = `/v${version}/${apiKey}${loaderParam}`;
 
-  r.log(agentDownloadUrl);
   return agentDownloadUrl;
 }
 
-export default { foo, summary, baz, hello, getAgentURL };
+export default { foo, summary, baz, hello, getAgentURL, getAgentQueryParams };
