@@ -1,5 +1,4 @@
-/// <reference path="../node_modules/njs-types/index.d.ts" />
-
+/// <reference path="../node_modules/njs-types/ngx_http_js_module.d.ts" />
 import querystring from "querystring";
 
 function foo(r) {
@@ -29,6 +28,9 @@ async function hello(r) {
   r.return(200, "Hello world!");
 }
 
+/**
+ * @param {NginxHTTPRequest} r
+ * */
 function getAgentQueryParams(r) {
   const rest = JSON.parse(JSON.stringify(r.args));
   delete rest["apiKey"];
@@ -42,6 +44,9 @@ function getAgentQueryParams(r) {
   return querystring.stringify(queryParams);
 }
 
+/**
+ * @param {NginxHTTPRequest} r
+ */
 function getAgentURL(r) {
   //   r.headersOut["X-Summary"] = reply.headersOut["Content-Type"];
   const DEFAULT_VERSION = "3";
