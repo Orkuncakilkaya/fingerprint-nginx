@@ -1,3 +1,5 @@
+/// <reference path="../node_modules/njs-types/index.d.ts" />
+
 function foo(r) {
   r.log("hello from foo() handler");
   return "foo";
@@ -21,8 +23,25 @@ function baz(r) {
   r.finish();
 }
 
-function hello(r) {
+async function hello(r) {
   r.return(200, "Hello world!");
 }
 
-export default { foo, summary, baz, hello };
+function getAgentURL(r) {
+  //   r.headersOut["X-Summary"] = reply.headersOut["Content-Type"];
+  const apiKey = r.args["apiKey"];
+  const loaderVersion = r.args["loaderVersion"];
+  const version = r.args["version"];
+
+  r.log(apiKey);
+  r.log(loaderVersion);
+  r.log(version);
+
+  const loaderParam = loaderVersion ? `/loader_v${loaderVersion}.js` : "";
+  const agentDownloadUrl = `/v${version}/${apiKey}${loaderParam}`;
+
+  r.log(agentDownloadUrl);
+  return agentDownloadUrl;
+}
+
+export default { foo, summary, baz, hello, getAgentURL };
