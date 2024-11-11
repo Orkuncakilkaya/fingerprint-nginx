@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to NGINX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Initialize the agent at application startup.
+        // Some ad blockers or browsers will block Fingerprint CDN URL.
+        // To fix this, use a custom subdomain or a proxy integration.
+        // (see info box below)
+        const fpPromise = import('/agent/v3/2UZgp3skqLzfJpFUGUrw')
+          .then(FingerprintJS => FingerprintJS.load({ region: "eu" }));
+      
+        // Get the visitor identifier when you need it.
+        fpPromise
+          .then(fp => fp.get())
+          .then(result => console.log(result.visitorId, result.requestId));
+      </script>
+      
+    <h1>Welcome to Your NGINX Server!</h1>
+    <p>If you're seeing this page, your NGINX Docker container is working correctly.</p>
+    <p>Start adding your own content to the html folder.</p>
+</body>
+</html>
