@@ -23,7 +23,7 @@
         // Some ad blockers or browsers will block Fingerprint CDN URL.
         // To fix this, use a custom subdomain or a proxy integration.
         // (see info box below)
-        const fpPromise = import('/agent/v3/2UZgp3skqLzfJpFUGUrw')
+        const fpPromise = import('/agent?apiKey=2UZgp3skqLzfJpFUGUrw')
           .then(FingerprintJS => FingerprintJS.load({ region: "eu" }));
       
         // Get the visitor identifier when you need it.

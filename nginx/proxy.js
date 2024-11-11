@@ -44,9 +44,10 @@ function getAgentQueryParams(r) {
 
 function getAgentURL(r) {
   //   r.headersOut["X-Summary"] = reply.headersOut["Content-Type"];
+  const DEFAULT_VERSION = "3";
   const apiKey = r.args["apiKey"];
   const loaderVersion = r.args["loaderVersion"];
-  const version = r.args["version"];
+  const version = r.args["version"] ?? DEFAULT_VERSION;
 
   const loaderParam = loaderVersion ? `/loader_v${loaderVersion}.js` : "";
   const agentDownloadUrl = `/v${version}/${apiKey}${loaderParam}`;
