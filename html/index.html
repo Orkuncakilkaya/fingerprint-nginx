@@ -23,8 +23,8 @@
         // Some ad blockers or browsers will block Fingerprint CDN URL.
         // To fix this, use a custom subdomain or a proxy integration.
         // (see info box below)
-        const fpPromise = import('/agent?apiKey=2UZgp3skqLzfJpFUGUrw')
-          .then(FingerprintJS => FingerprintJS.load({ region: "eu", endpoint: "/identification" }));
+        const fpPromise = import((`/${AGENT_BASE}?apiKey=2UZgp3skqLzfJpFUGUrw`))
+          .then(FingerprintJS => FingerprintJS.load({ region: "eu", endpoint: `/${IDENTIFICATION_BASE}` }));
       
         // Get the visitor identifier when you need it.
         fpPromise
@@ -33,7 +33,7 @@
       </script>
       
     <h1>Welcome to Your NGINX Server! Hey</h1>
-    <a href="http://localhost:8080/agent?apiKey=2UZgp3skqLzfJpFUGUrw&version=3&loaderVersion=3.9.2">Agent</a>
+    <a href="http://localhost:8080/${AGENT_BASE}?apiKey=2UZgp3skqLzfJpFUGUrw&version=3&loaderVersion=3.9.2">Agent</a>
     <p>If you're seeing this page, your NGINX Docker container is working correctly.</p>
     <p>Start adding your own content to the html folder.</p>
 </body>
