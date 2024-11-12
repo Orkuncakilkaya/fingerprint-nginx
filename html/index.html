@@ -23,18 +23,21 @@
         // Some ad blockers or browsers will block Fingerprint CDN URL.
         // To fix this, use a custom subdomain or a proxy integration.
         // (see info box below)
-        const fpPromise = import((`/${AGENT_BASE}?apiKey=2UZgp3skqLzfJpFUGUrw`))
-          .then(FingerprintJS => FingerprintJS.load({ region: "${DEFAULT_REGION}", endpoint: "/${IDENTIFICATION_BASE}?region=${DEFAULT_REGION}" }));
+        const fpPromise = import((`/${FPJS_AGENT_DOWNLOAD_PATH}?apiKey=2UZgp3skqLzfJpFUGUrw`))
+          .then(FingerprintJS => FingerprintJS.load({ region: "${DEFAULT_REGION}", endpoint: "/${FPJS_GET_RESULT_PATH}?region=${DEFAULT_REGION}" }));
 
         // Get the visitor identifier when you need it.
         fpPromise
           .then(fp => fp.get())
-          .then(result => console.log(result.visitorId, result.requestId));
+          .then(result => {
+            console.log(result.visitorId, result.requestId)
+            document.getElementById("visitorId").innerText = result.visitorId;
+          });
       </script>
 
-    <h1>Welcome to Your NGINX Server! Hey</h1>
-    <a href="http://localhost:8080/${AGENT_BASE}?apiKey=2UZgp3skqLzfJpFUGUrw&version=3&loaderVersion=3.9.2">Agent</a>
+    <h1>Welcome to Your NGINX Server!</h1>
+    <a href="http://localhost:8080/${FPJS_AGENT_DOWNLOAD_PATH}?apiKey=2UZgp3skqLzfJpFUGUrw&version=3&loaderVersion=3.9.2" target="_blank">Test Agent Download here</a>
     <p>If you're seeing this page, your NGINX Docker container is working correctly.</p>
-    <p>Start adding your own content to the html folder.</p>
+    <h2>Your visitor ID is: <span id="visitorId"></span></h2>
 </body>
 </html>

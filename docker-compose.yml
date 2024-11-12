@@ -4,8 +4,8 @@ services:
       context: .
       args:
         - DNS_RESOLVER=8.8.8.8
-        - IDENTIFICATION_BASE=identification
-        - AGENT_BASE=agent
+        - FPJS_GET_RESULT_PATH=result
+        - FPJS_AGENT_DOWNLOAD_PATH=agent
         - DEFAULT_REGION=eu
     ports:
       - "8080:80"

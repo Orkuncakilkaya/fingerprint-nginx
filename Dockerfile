@@ -7,9 +7,9 @@ COPY nginx/proxy.js /tmp/proxy.js
 COPY html/index.html /tmp/index.html
 # replace variables in each file with defintions from docker-compose.yml
 ARG DNS_RESOLVER
-ARG IDENTIFICATION_BASE
-ARG AGENT_BASE
+ARG FPJS_GET_RESULT_PATH
+ARG FPJS_AGENT_DOWNLOAD_PATH
 ARG DEFAULT_REGION
-RUN envsubst '${IDENTIFICATION_BASE} ${AGENT_BASE} ${DNS_RESOLVER}' < /tmp/proxy.js > /etc/nginx/proxy.js
-RUN envsubst '${IDENTIFICATION_BASE} ${AGENT_BASE} ${DNS_RESOLVER}' < /tmp/nginx.conf > /etc/nginx/nginx.conf
-RUN envsubst '${IDENTIFICATION_BASE} ${AGENT_BASE} ${DNS_RESOLVER} ${DEFAULT_REGION}' < /tmp/index.html > /usr/share/nginx/html/index.html
+RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH} ${DNS_RESOLVER}' < /tmp/proxy.js > /etc/nginx/proxy.js
+RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH} ${DNS_RESOLVER}' < /tmp/nginx.conf > /etc/nginx/nginx.conf
+RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH} ${DNS_RESOLVER} ${DEFAULT_REGION}' < /tmp/index.html > /usr/share/nginx/html/index.html
