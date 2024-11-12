@@ -64,17 +64,35 @@ function getAgentURL(r) {
   return agentDownloadUrl;
 }
 
+
 /**
+ * Uses `region` query param to return the correct API base URL
  * @param {NginxHTTPRequest} r
+ * @returns {string}
  */
-function getCacheURL(r) {
-  const uri = r.uri
-  r.log(uri)
-  // of '/identification/1d3n71f1c4710n-r35ul7/abc345/xyz123' match 'abc345/xyz123'
-  const match = uri.match(/^\/identification\/[a-zA-Z0-9\-]+\/(.+)$/);
-  const output = match ? match[1] : "";
-  r.log(output)
-  return output;
+function getApiBaseFromReqionQueryParam(r) {
+  const region = r.args["region"];
+  r.log(`Provided 'region' query param is '${region}'`);
+
+  // Default to US API
+  let result = "api.fpjs.io";
+  if (region === "eu") {
+    result = "eu.api.fpjs.io";
+  }
+  if (region === "ap") {
+    result = "ap.api.fpjs.io";
+  }
+  r.log(`Returning ${result}`);
+  return result;
 }
 
-export default { foo, getCacheURL, summary, identification, baz, hello, getAgentURL, getAgentQueryParams };
+export default {
+  foo,
+  summary,
+  identification,
+  baz,
+  hello,
+  getAgentURL,
+  getAgentQueryParams,
+  getApiBaseFromReqionQueryParam,
+};
