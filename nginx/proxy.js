@@ -1,20 +1,83 @@
 /// <reference path="../node_modules/njs-types/ngx_http_js_module.d.ts" />
-import querystring from "querystring";
+
+/**
+ * @param {NginxHTTPRequest} r
+ * */
+function getFilteredCookieHeader(r) {
+  if (r.headersIn["Cookie"]) {
+    return r.headersIn["Cookie"]
+      .split(";")
+      .map((raw) => {
+        const splitted = raw.split("=");
+        const key = splitted[0].trim();
+        if (key === "_iidt") {
+          return raw;
+        }
+        return null;
+      })
+      .filter((t) => t != null)
+      .join(";")
+      .trim();
+  }
+
+  return '';
+}
+
+/**
+ * @param {NginxHTTPRequest} r
+ * */
+function getGeneralQueryParams(r, type) {
+  const rest = JSON.parse(JSON.stringify(r.args));
+  const queryParams = [];
+
+  // Add the custom 'ii' values
+  if (rest['ii']) {
+    // Ensure 'ii' is an array (if it's a single value, turn it into an array)
+    if (!Array.isArray(rest['ii'])) {
+      rest['ii'] = [rest['ii']];
+    }
+    // Add the custom 'ii' value(s)
+    rest['ii'].push(`nginx-proxy-integration/0.1/${type}`);
+  } else {
+    // If no 'ii' exists, start a new array with the custom value
+    rest['ii'] = [`nginx-proxy-integration/0.1/${type}`];
+  }
+
+  // Loop through all keys and build the query string
+  for (const key in rest) {
+    if (Object.hasOwnProperty.call(rest, key)) {
+      if (Array.isArray(rest[key])) {
+        // If the value is an array, append each value as a separate parameter
+        rest[key].forEach(value => {
+          queryParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+        });
+      } else {
+        // Otherwise, treat it as a single value
+        queryParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(rest[key])}`);
+      }
+    }
+  }
+
+  return queryParams;
+}
+
+/**
+ * @param {NginxHTTPRequest} r
+ * */
+function getIngressQueryParams(r) {
+  return getGeneralQueryParams(r, "ingress").join("&");
+}
 
 /**
  * @param {NginxHTTPRequest} r
  * */
 function getAgentQueryParams(r) {
-  const rest = JSON.parse(JSON.stringify(r.args));
+  const rest = getGeneralQueryParams(r, "procdn");
   delete rest["apiKey"];
   delete rest["loaderVersion"];
   delete rest["version"];
 
-  const queryParams = { ii: "nginx-proxy-integration/0.1/procdn" };
-  for (const key in rest) {
-    queryParams[key] = rest[key];
-  }
-  return querystring.stringify(queryParams);
+  return rest.join("&");
 }
 
 /**
@@ -30,10 +93,6 @@ function getAgentURL(r) {
   const agentDownloadUrl = `/v${version}/${apiKey}${loaderParam}`;
 
   return agentDownloadUrl;
-}
-
-async function identification(r) {
-  r.return(200, "Identification Hello!");
 }
 
 /**
@@ -58,8 +117,9 @@ function getApiBaseFromReqionQueryParam(r) {
 }
 
 export default {
-  identification,
   getAgentURL,
   getAgentQueryParams,
   getApiBaseFromReqionQueryParam,
+  getIngressQueryParams,
+  getFilteredCookieHeader,
 };
