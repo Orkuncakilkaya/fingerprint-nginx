@@ -19,10 +19,6 @@
 </head>
 <body>
     <script>
-        // Initialize the agent at application startup.
-        // Some ad blockers or browsers will block Fingerprint CDN URL.
-        // To fix this, use a custom subdomain or a proxy integration.
-        // (see info box below)
         const fpPromise = import((`/${FPJS_AGENT_DOWNLOAD_PATH}?apiKey=2UZgp3skqLzfJpFUGUrw`))
           .then(FingerprintJS => FingerprintJS.load({ region: "eu", endpoint: "/${FPJS_GET_RESULT_PATH}?region=eu" }));
 

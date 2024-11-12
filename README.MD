@@ -12,7 +12,7 @@ To run the project, use `docker compose up --build -d`. Run after every file cha
 - [x] Proxy the agent download request
 - [x] Proxy the identification request
 - [x] Proxy the browser cache request
-- [ ] Allow user to customize paths and proxy secret
+- [x] Allow user to customize paths and proxy secret
 - [ ] Package it as a module (or something) that you can easily add to your existing NGINX setup
 - [ ] Package it as a Docker image you can easily deploy anywhere
 - [ ] Add documentation

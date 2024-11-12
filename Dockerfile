@@ -9,6 +9,8 @@ COPY html/index.html /tmp/index.html
 ARG DNS_RESOLVER
 ARG FPJS_GET_RESULT_PATH
 ARG FPJS_AGENT_DOWNLOAD_PATH
-RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH} ${DNS_RESOLVER}' < /tmp/proxy.js > /etc/nginx/proxy.js
-RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH} ${DNS_RESOLVER}' < /tmp/nginx.conf > /etc/nginx/nginx.conf
-RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH} ${DNS_RESOLVER}' < /tmp/index.html > /usr/share/nginx/html/index.html
+ARG FPJS_PROXY_SECRET
+# Note: We might be able to simplify this using https://github.com/docker-library/docs/tree/master/nginx#using-environment-variables-in-nginx-configuration-new-in-119
+RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH} ${DNS_RESOLVER} ${FPJS_PROXY_SECRET}' < /tmp/proxy.js > /etc/nginx/proxy.js
+RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH} ${DNS_RESOLVER} ${FPJS_PROXY_SECRET}' < /tmp/nginx.conf > /etc/nginx/nginx.conf
+RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH}' < /tmp/index.html > /usr/share/nginx/html/index.html

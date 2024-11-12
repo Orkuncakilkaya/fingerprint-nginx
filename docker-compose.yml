@@ -3,9 +3,12 @@ services:
     build:
       context: .
       args:
-        - DNS_RESOLVER=8.8.8.8
-        - FPJS_GET_RESULT_PATH=result
-        - FPJS_AGENT_DOWNLOAD_PATH=agent
+        # These are used are build arguments by the Dockerfile
+        # Reads DNS_RESOLVER from environment variable, defaults to 8.8.8.8 if not set
+        - DNS_RESOLVER=${DNS_RESOLVER:-8.8.8.8}
+        - FPJS_GET_RESULT_PATH=${FPJS_GET_RESULT_PATH:-result}
+        - FPJS_AGENT_DOWNLOAD_PATH=${FPJS_AGENT_DOWNLOAD_PATH:-agent}
+        - FPJS_PROXY_SECRET=${FPJS_PROXY_SECRET:-secret}
     ports:
       - "8080:80"
     restart: unless-stopped
