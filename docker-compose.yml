@@ -6,7 +6,6 @@ services:
         - DNS_RESOLVER=8.8.8.8
         - FPJS_GET_RESULT_PATH=result
         - FPJS_AGENT_DOWNLOAD_PATH=agent
-        - DEFAULT_REGION=eu
     ports:
       - "8080:80"
     restart: unless-stopped

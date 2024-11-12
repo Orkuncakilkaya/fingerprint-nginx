@@ -24,7 +24,7 @@
         // To fix this, use a custom subdomain or a proxy integration.
         // (see info box below)
         const fpPromise = import((`/${FPJS_AGENT_DOWNLOAD_PATH}?apiKey=2UZgp3skqLzfJpFUGUrw`))
-          .then(FingerprintJS => FingerprintJS.load({ region: "${DEFAULT_REGION}", endpoint: "/${FPJS_GET_RESULT_PATH}?region=${DEFAULT_REGION}" }));
+          .then(FingerprintJS => FingerprintJS.load({ region: "eu", endpoint: "/${FPJS_GET_RESULT_PATH}?region=eu" }));
 
         // Get the visitor identifier when you need it.
         fpPromise
