@@ -9,6 +9,7 @@ COPY html/index.html /tmp/index.html
 ARG DNS_RESOLVER
 ARG IDENTIFICATION_BASE
 ARG AGENT_BASE
+ARG DEFAULT_REGION
 RUN envsubst '${IDENTIFICATION_BASE} ${AGENT_BASE} ${DNS_RESOLVER}' < /tmp/proxy.js > /etc/nginx/proxy.js
 RUN envsubst '${IDENTIFICATION_BASE} ${AGENT_BASE} ${DNS_RESOLVER}' < /tmp/nginx.conf > /etc/nginx/nginx.conf
-RUN envsubst '${IDENTIFICATION_BASE} ${AGENT_BASE} ${DNS_RESOLVER}' < /tmp/index.html > /usr/share/nginx/html/index.html
+RUN envsubst '${IDENTIFICATION_BASE} ${AGENT_BASE} ${DNS_RESOLVER} ${DEFAULT_REGION}' < /tmp/index.html > /usr/share/nginx/html/index.html

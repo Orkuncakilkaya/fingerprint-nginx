@@ -6,6 +6,7 @@ services:
         - DNS_RESOLVER=8.8.8.8
         - IDENTIFICATION_BASE=identification
         - AGENT_BASE=agent
+        - DEFAULT_REGION=eu
     ports:
       - "8080:80"
     restart: unless-stopped
