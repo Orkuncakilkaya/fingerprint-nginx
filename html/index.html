@@ -20,8 +20,8 @@
 </head>
 <body>
     <script>
-        const fpPromise = import((`/${FPJS_AGENT_DOWNLOAD_PATH}?apiKey=2UZgp3skqLzfJpFUGUrw`))
-          .then(FingerprintJS => FingerprintJS.load({ region: "eu", endpoint: "/${FPJS_GET_RESULT_PATH}?region=eu" }));
+        const fpPromise = import(("/${FPJS_AGENT_DOWNLOAD_PATH}?apiKey=${FPJS_PUBLIC_API_KEY}"))
+          .then(FingerprintJS => FingerprintJS.load({ region: "eu", endpoint: "/${FPJS_GET_RESULT_PATH}?region=${FPJS_REGION}" }));
 
         // Get the visitor identifier when you need it.
         fpPromise
@@ -33,7 +33,7 @@
       </script>
 
     <h1>Welcome to Your NGINX Server!</h1>
-    <a href="http://localhost:8080/${FPJS_AGENT_DOWNLOAD_PATH}?apiKey=2UZgp3skqLzfJpFUGUrw&version=3&loaderVersion=3.9.2" target="_blank">Test Agent Download here</a>
+    <a href="/${FPJS_AGENT_DOWNLOAD_PATH}?apiKey=${FPJS_PUBLIC_API_KEY}&version=3&loaderVersion=3.9.2" target="_blank">Test Agent Download here</a>
     <p>If you're seeing this page, your NGINX Docker container is working correctly.</p>
     <h2>Your visitor ID is: <span id="visitorId"></span></h2>
 </body>
