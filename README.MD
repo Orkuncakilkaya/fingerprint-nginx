@@ -30,6 +30,7 @@ To run the project, use `docker compose up --build -d`. Run after every file cha
 
 Fingerprint NGINX Proxy Integration is responsible for proxying identification and agent-download requests between your website and Fingerprint through your Fastly infrastructure. The integration consists of a reusable piece of NGINX configuration. You can include it in your existing NGINX configuration or deploy as Docker image anywhere you want. The NGINX template is available on [GitHub](https://github.com/fingerprintjs/fingerprint-pro-nginx-proxy-integration).
 
+![README image](./resources/readme.png)
 
 
 > [!WARNING]  
