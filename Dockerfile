@@ -15,7 +15,7 @@ ARG FPJS_PUBLIC_API_KEY=public
 ARG FPJS_REGION=us
 ARG FPJS_CDN_HOST=fpcdn.io
 ARG FPJS_API_HOST=api.fpjs.io
-ARG FPJS_PLATFORM_IP_HEADER_NAME="$http_do_connecting_ip"
+ARG FPJS_PLATFORM_IP_HEADER_NAME='$http_do_connecting_ip'
 # Note: We might be able to simplify this using https://github.com/docker-library/docs/tree/master/nginx#using-environment-variables-in-nginx-configuration-new-in-119
 RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH} ${DNS_RESOLVER} ${FPJS_PROXY_SECRET} ${FPJS_CDN_HOST} ${FPJS_API_HOST} ${FPJS_PLATFORM_IP_HEADER_NAME}' < /tmp/fingerprint_proxy.js > /etc/nginx/fingerprint_proxy.js
 RUN envsubst '${FPJS_GET_RESULT_PATH} ${FPJS_AGENT_DOWNLOAD_PATH} ${DNS_RESOLVER} ${FPJS_PROXY_SECRET} ${FPJS_CDN_HOST} ${FPJS_API_HOST} ${FPJS_PLATFORM_IP_HEADER_NAME}' < /tmp/nginx.conf > /etc/nginx/nginx.conf
