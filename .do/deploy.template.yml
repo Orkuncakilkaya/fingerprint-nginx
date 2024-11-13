@@ -2,6 +2,15 @@ spec:
   name: fingerprint-pro-nginx-integration
   services:
     - name: fingerprint-nginx
+      dockerfile_path: Dockerfile
+      github:
+        branch: main
+        deploy_on_push: true
+        repo: Orkuncakilkaya/fingerprint-nginx
+      http_port: 80
+      instance_count: 1
+      instance_size_slug: apps-s-1vcpu-0.5gb
+      source_dir: /
       git:
         branch: main
         repo_clone_url: https://github.com/Orkuncakilkaya/fingerprint-nginx.git
@@ -32,14 +41,3 @@ spec:
         - key: FPJS_PLATFORM_IP_HEADER_NAME
           scope: RUN_AND_BUILD_TIME
           value: "$http_do_connecting_ip"
-      services:
-        - dockerfile_path: Dockerfile
-          github:
-            branch: main
-            deploy_on_push: true
-            repo: Orkuncakilkaya/fingerprint-nginx
-          http_port: 80
-          instance_count: 1
-          instance_size_slug: apps-s-1vcpu-0.5gb
-          name: fingerprint-nginx
-          source_dir: /
