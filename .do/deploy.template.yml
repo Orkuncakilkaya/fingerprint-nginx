@@ -20,11 +20,9 @@ spec:
         - key: FPJS_PROXY_SECRET
           scope: RUN_AND_BUILD_TIME
           value: "yourSecretKey"
-          type: SECRET
         - key: FPJS_PUBLIC_API_KEY
           scope: RUN_AND_BUILD_TIME
           value: "yourPublicKey"
-          type: SECRET
         - key: FPJS_REGION
           scope: RUN_AND_BUILD_TIME
           value: "us"
