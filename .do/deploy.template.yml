@@ -32,8 +32,6 @@ spec:
         - key: FPJS_PLATFORM_IP_HEADER_NAME
           scope: RUN_AND_BUILD_TIME
           value: "$http_do_connecting_ip"
-      features:
-        - buildpack-stack=ubuntu-22
       ingress:
         rules:
           - component:
