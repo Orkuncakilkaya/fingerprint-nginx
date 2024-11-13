@@ -32,13 +32,6 @@ spec:
         - key: FPJS_PLATFORM_IP_HEADER_NAME
           scope: RUN_AND_BUILD_TIME
           value: "$http_do_connecting_ip"
-      ingress:
-        rules:
-          - component:
-              name: fingerprint-nginx
-            match:
-              path:
-                prefix: /
       services:
         - dockerfile_path: Dockerfile
           github:
