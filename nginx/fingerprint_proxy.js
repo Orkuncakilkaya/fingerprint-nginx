@@ -20,27 +20,28 @@ function getFilteredCookieHeader(r) {
       .trim();
   }
 
-  return '';
+  return "";
 }
 
 /**
  * @param {NginxHTTPRequest} r
+ * @param {'procdn' | 'ingress'} type
  * */
 function getGeneralQueryParams(r, type) {
   const rest = JSON.parse(JSON.stringify(r.args));
   const queryParams = [];
 
   // Add the custom 'ii' values
-  if (rest['ii']) {
+  if (rest["ii"]) {
     // Ensure 'ii' is an array (if it's a single value, turn it into an array)
-    if (!Array.isArray(rest['ii'])) {
-      rest['ii'] = [rest['ii']];
+    if (!Array.isArray(rest["ii"])) {
+      rest["ii"] = [rest["ii"]];
     }
     // Add the custom 'ii' value(s)
-    rest['ii'].push(`nginx-proxy-integration/0.1/${type}`);
+    rest["ii"].push(`nginx-proxy-integration/0.1/${type}`);
   } else {
     // If no 'ii' exists, start a new array with the custom value
-    rest['ii'] = [`nginx-proxy-integration/0.1/${type}`];
+    rest["ii"] = [`nginx-proxy-integration/0.1/${type}`];
   }
 
   // Loop through all keys and build the query string
@@ -48,12 +49,16 @@ function getGeneralQueryParams(r, type) {
     if (Object.hasOwnProperty.call(rest, key)) {
       if (Array.isArray(rest[key])) {
         // If the value is an array, append each value as a separate parameter
-        rest[key].forEach(value => {
-          queryParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+        rest[key].forEach((value) => {
+          queryParams.push(
+            `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+          );
         });
       } else {
         // Otherwise, treat it as a single value
-        queryParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(rest[key])}`);
+        queryParams.push(
+          `${encodeURIComponent(key)}=${encodeURIComponent(rest[key])}`
+        );
       }
     }
   }
