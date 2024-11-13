@@ -9,6 +9,12 @@ services:
         - FPJS_GET_RESULT_PATH=${FPJS_GET_RESULT_PATH:-result}
         - FPJS_AGENT_DOWNLOAD_PATH=${FPJS_AGENT_DOWNLOAD_PATH:-agent}
         - FPJS_PROXY_SECRET=${FPJS_PROXY_SECRET:-secret}
+        - FPJS_PUBLIC_API_KEY=${FPJS_PUBLIC_API_KEY:-2UZgp3skqLzfJpFUGUrw}
+        - FPJS_REGION=${FPJS_REGION:-us}
+        - FPJS_CDN_HOST=${FPJS_CDN_HOST:-fpcdn.io}
+        - FPJS_API_HOST=${FPJS_API_HOST:-api.fpjs.io}
+        - FPJS_PLATFORM_IP_HEADER_NAME=${FPJS_PLATFORM_IP_HEADER_NAME:-'$http_do_connecting_ip'}
+        - HTTP_DO_CONNECTING_IP=${HTTP_DO_CONNECTING_IP:-""}
     ports:
       - "8080:80"
     restart: unless-stopped
