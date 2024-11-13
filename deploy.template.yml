@@ -4,7 +4,7 @@ spec:
     - name: fingerprint-nginx
       git:
         branch: main
-        repo_clone_url: https://github.com/fingerprintjs/fingerprint-pro-nginx-proxy-integration.git
+        repo_clone_url: https://github.com/Orkuncakilkaya/fingerprint-nginx.git
       envs:
         - key: FPJS_AGENT_DOWNLOAD_PATH
           scope: RUN_AND_BUILD_TIME
@@ -46,7 +46,7 @@ spec:
           github:
             branch: main
             deploy_on_push: true
-            repo: fingerprintjs/fingerprint-pro-nginx-proxy-integration
+            repo: Orkuncakilkaya/fingerprint-nginx
           http_port: 80
           instance_count: 1
           instance_size_slug: apps-s-1vcpu-0.5gb
