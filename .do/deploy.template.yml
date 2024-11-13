@@ -1,10 +1,15 @@
 spec:
-  name: fingerprint-pro-nginx-integration
+  name: fingerprint-nginx-integration
   services:
     - name: fingerprint-nginx
+      dockerfile_path: Dockerfile
+      http_port: 80
+      instance_count: 1
+      instance_size_slug: apps-s-1vcpu-0.5gb
+      source_dir: /
       git:
         branch: main
-        repo_clone_url: https://github.com/fingerprintjs/fingerprint-pro-nginx-proxy-integration.git
+        repo_clone_url: https://github.com/Orkuncakilkaya/fingerprint-nginx.git
       envs:
         - key: FPJS_AGENT_DOWNLOAD_PATH
           scope: RUN_AND_BUILD_TIME
@@ -15,11 +20,9 @@ spec:
         - key: FPJS_PROXY_SECRET
           scope: RUN_AND_BUILD_TIME
           value: "yourSecretKey"
-          type: SECRET
         - key: FPJS_PUBLIC_API_KEY
           scope: RUN_AND_BUILD_TIME
           value: "yourPublicKey"
-          type: SECRET
         - key: FPJS_REGION
           scope: RUN_AND_BUILD_TIME
           value: "us"
@@ -32,23 +35,3 @@ spec:
         - key: FPJS_PLATFORM_IP_HEADER_NAME
           scope: RUN_AND_BUILD_TIME
           value: "$http_do_connecting_ip"
-      features:
-        - buildpack-stack=ubuntu-22
-      ingress:
-        rules:
-          - component:
-              name: fingerprint-nginx
-            match:
-              path:
-                prefix: /
-      services:
-        - dockerfile_path: Dockerfile
-          github:
-            branch: main
-            deploy_on_push: true
-            repo: fingerprintjs/fingerprint-pro-nginx-proxy-integration
-          http_port: 80
-          instance_count: 1
-          instance_size_slug: apps-s-1vcpu-0.5gb
-          name: fingerprint-nginx
-          source_dir: /

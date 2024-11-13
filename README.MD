@@ -1,3 +1,7 @@
+<a href="https://cloud.digitalocean.com/apps/new?repo=https://github.com/Orkuncakilkaya/fingerprint-nginx/tree/main">
+ <img src="https://www.deploytodo.com/do-btn-blue.svg" alt="Deploy to DO">
+</a>
+
 # Fingerprint Pro NGINX Proxy integration
 
 The goal of this project is create and NGINX integration for Fingerprint that will proxy requests between your client agent and Fingerprint CDN and API.
