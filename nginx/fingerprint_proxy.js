@@ -109,7 +109,7 @@ function getApiBaseFromReqionQueryParam(r) {
   const region = r.args["region"];
   r.log(`Provided 'region' query param is '${region}'`);
 
-  const fpjsDomain = "api.fpjs.io"
+  const fpjsDomain = "${FPJS_API_HOST}"
 
   // Default to US API
   let result = fpjsDomain;
