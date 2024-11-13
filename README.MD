@@ -13,9 +13,12 @@ To run the project, use `docker compose up --build -d`. Run after every file cha
 - [x] Proxy the identification request
 - [x] Proxy the browser cache request
 - [x] Allow user to customize paths and proxy secret
-- [ ] Package it as a module (or something) that you can easily add to your existing NGINX setup
-- [ ] Package it as a Docker image you can easily deploy anywhere
+- [x] Package it as a module (or something) that you can easily add to your existing NGINX setup
+- [x] Package it as a Docker image you can easily deploy anywhere
 - [ ] Add documentation
 - [ ] Add tests
 - [ ] Test integration against mock warden
+- [ ] Unify build process (
+  - [ ] use build.sh inside Dockerfile
+  - [ ] define env variable fallbacks in one common place that works locally, in docker-compose.yml, build.sh, everywhere)
 
