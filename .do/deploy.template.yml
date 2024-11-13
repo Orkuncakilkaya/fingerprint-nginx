@@ -1,5 +1,5 @@
 spec:
-  name: fingerprint-pro-nginx-integration
+  name: fingerprint-nginx-integration
   services:
     - name: fingerprint-nginx
       dockerfile_path: Dockerfile
