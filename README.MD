@@ -20,8 +20,10 @@ To run the project, use `docker compose up --build -d`. Run after every file cha
 - [x] Package it as a module (or something) that you can easily add to your existing NGINX setup
 - [x] Package it as a Docker image you can easily deploy anywhere
 - [ ] Add documentation
+- [ ] Make code more readable (mainly fingerprint_proxy.js)
 - [ ] Add tests
 - [ ] Test integration against mock warden
+  - [ ] Fix browser cache request caching
 - [ ] Unify build process (
   - [ ] use build.sh inside Dockerfile
   - [ ] define env variable fallbacks in one common place that works locally, in docker-compose.yml, build.sh, everywhere)
